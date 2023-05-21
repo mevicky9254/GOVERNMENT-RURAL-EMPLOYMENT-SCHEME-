@@ -1,0 +1,68 @@
+package com.mgnrega.model;
+
+import java.time.LocalDate;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
+
+
+@Entity
+@Data
+public class Worker {
+
+	
+	
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	
+	
+	@Column(name="name", nullable=false)
+	private String name;
+	
+	
+	@Email
+	@NotBlank
+	@Column(unique = true,nullable = false)
+	private String email;
+	
+	@Size(min = 12, max = 12, message="INVALID ADHAR NUMBER")
+	@Pattern(regexp="[0-9]{12}")
+	@Column(name="adhar", nullable=false, unique=true)
+	private String adhar;
+	
+	@NotNull
+	@NotBlank
+	private LocalDate dob;
+	
+	@NotNull
+	@NotBlank
+	private String gender;
+	
+	@NotNull
+	@NotBlank
+	private String panchayatName;
+	
+	@NotNull
+	@NotBlank
+	private String district;
+	
+	@NotNull
+	@NotBlank
+	private String State;
+	
+	@OneToOne
+	private Project projects;
+	
+}
