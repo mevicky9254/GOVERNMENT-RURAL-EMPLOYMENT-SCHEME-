@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.mgnrega.exception.GMPException;
 import com.mgnrega.exception.ProjectException;
 import com.mgnrega.exception.WorkerException;
+import com.mgnrega.model.GramPanchayatMember;
 import com.mgnrega.model.Project;
 import com.mgnrega.model.Worker;
 import com.mgnrega.repository.GMPRepository;
@@ -74,38 +75,54 @@ public class GMPServiceImp implements GMPService{
 
 	
 	
-	@Override
-	public Worker viewWorkerNameAndDays(int projectId) throws WorkerException, ProjectException {
-		
-		 Optional<Project>proOptional=pRepo.findById( projectId);
-			
-			
-			Project project=proOptional.get();
-			
-			if(proOptional.isEmpty()) {
-				
-				 throw new ProjectException("Project does not exists with the ProjectID :"+project.getId()+" ! Enter a valid Project Id");
-				
-			}
-			
-			
-			project.getWorkers();
-			
-		
-		
-		
-	}
+	
 
-	@Override
-	public List<Worker> viewListOfworkersWithNameAndWages() throws WorkerException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public Worker deleteWorker(Integer workerId) throws WorkerException {
+		
+		
+		Optional<Worker> workerOptional=workerRepo.findById(workerId);
+		
+		
+		if(workerOptional.isEmpty()) {
+			
+			throw new WorkerException("Worker is not present in the record with workerId : "+workerId);
+			
+		}
+		
+		workerRepo.deleteById(workerId);
+		
+		Worker worker=workerOptional.get();
+		
+		return worker;
+		
+	}
+
+
+
+
+	@Override
+	public GramPanchayatMember updatePassword(Integer gmpId, String password) throws GMPException {
 		// TODO Auto-generated method stub
-		return null;
+		
+    Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+		
+		
+		GramPanchayatMember gmp=gmpOptional.get();
+		
+		if(gmpOptional.isEmpty()) {
+			
+			 throw new GMPException("GMP does not exists with the GMPID :"+gmp.getId()+" ! Enter a valid GMP Id");
+			
+		}
+		
+		gmp.setPassword(password);
+		
+		return gmpRepo.save(gmp);
+		
+		
 	}
 
 }
