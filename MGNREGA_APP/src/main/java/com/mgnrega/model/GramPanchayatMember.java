@@ -44,6 +44,11 @@ public class GramPanchayatMember {
 	@Column(name="adhar", nullable=false, unique=true)
 	private String adhar;
 	
+	
+	@Column(name="password",nullable=false)
+	@Size(min=5, max=8, message="Password should be length of min 5 and maximum 8")
+	private String password;
+	
 	@NotNull
 	@NotBlank
 	private LocalDate dob;

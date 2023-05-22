@@ -1,0 +1,5 @@
+package com.mgnrega.controller;
+
+public class GMPController {
+
+}

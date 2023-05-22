@@ -3,11 +3,10 @@ package com.mgnrega.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mgnrega.model.GramPanchayatMember;
+import com.mgnrega.model.Project;
+
 
 @Repository
-public interface GMPRepository extends JpaRepository<GramPanchayatMember,Integer> {
+public interface ProjectRepository extends JpaRepository<Project,Integer>{
 
-	
-	
 }
