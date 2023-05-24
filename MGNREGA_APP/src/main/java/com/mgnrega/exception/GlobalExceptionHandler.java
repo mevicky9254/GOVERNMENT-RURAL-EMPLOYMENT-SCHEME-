@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
 	
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
-	public ResponseEntity<MyError> GMPException(NoHandlerFoundException e, WebRequest wr){
+	public ResponseEntity<MyError>NoHandlerFoundException(NoHandlerFoundException e, WebRequest wr){
 		
 		MyError me=new MyError();
 		
@@ -96,6 +96,7 @@ public class GlobalExceptionHandler {
 	
 	
 	
+
 	
 	
 }

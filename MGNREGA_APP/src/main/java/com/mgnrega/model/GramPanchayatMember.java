@@ -13,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -49,8 +50,7 @@ public class GramPanchayatMember {
 	@Size(min=5, max=8, message="Password should be length of min 5 and maximum 8")
 	private String password;
 	
-	@NotNull
-	@NotBlank
+	@NotNull(message = "DOB cannot be null")
 	private LocalDate dob;
 	
 	@NotNull
@@ -70,12 +70,12 @@ public class GramPanchayatMember {
 	private String State;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	private List<Project> projects;
-	
+	@OneToMany(mappedBy = "gramPanchayatMember", cascade = CascadeType.ALL)
+    private List<Project> projects;
+
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	private List<Worker> workers;
+    @OneToMany(mappedBy = "gramPanchayatMember", cascade = CascadeType.ALL)
+    private List<Worker> workers;
 	
 	
 	

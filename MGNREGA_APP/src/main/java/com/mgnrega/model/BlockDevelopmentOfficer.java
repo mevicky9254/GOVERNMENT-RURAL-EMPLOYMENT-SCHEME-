@@ -11,6 +11,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -36,14 +37,17 @@ public class BlockDevelopmentOfficer {
 	
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "bdo_id")
 	private List<Project> projects;
 	
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name = "bdo_id")
 	private List<Worker> workers;
 	
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+//	@JoinColumn(name = "bdo_id")
 	private List<GramPanchayatMember> gmps;
 	
 	

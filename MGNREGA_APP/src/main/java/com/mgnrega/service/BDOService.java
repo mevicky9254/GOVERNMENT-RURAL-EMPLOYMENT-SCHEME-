@@ -19,7 +19,7 @@ public interface BDOService {
 	
 	public List<GramPanchayatMember> viewListOfGMPS()throws GMPException;
 	
-	public List<Project> allocateProjectToGMP(Integer gmpId,Integer projectId)throws GMPException,ProjectException;
+	public GramPanchayatMember allocateProjectToGMP(Integer gmpId,Integer projectId)throws GMPException,ProjectException;
 	
 	public List<Worker> viewListWorkers()throws WorkerException;
 
