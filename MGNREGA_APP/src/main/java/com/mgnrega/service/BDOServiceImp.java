@@ -68,6 +68,30 @@ public class BDOServiceImp implements BDOService{
 
 	
 	
+
+	@Override
+	public Project deleteProject(Integer projectId) throws ProjectException {
+		
+		  Optional<Project>proOptional=pRepo.findById( projectId);
+			
+			
+			Project project=proOptional.get();
+			
+			if(proOptional.isEmpty()) {
+				
+				 throw new ProjectException("Project does not exists with the ProjectID :"+project.getId()+" ! Enter a valid Project Id");
+				
+			}
+			
+			
+			 pRepo.delete(project);
+			
+		
+		    return project;
+	}
+	
+	
+	
 	
 	@Override
 	public GramPanchayatMember createGMP(GramPanchayatMember GMP) throws GMPException {
@@ -91,6 +115,8 @@ public class BDOServiceImp implements BDOService{
 	        }
 	    }
 	    
+	  
+	    
 	    return gmpRepo.save(GMP);
 	}
 
@@ -100,6 +126,28 @@ public class BDOServiceImp implements BDOService{
 	public List<GramPanchayatMember> viewListOfGMPS() throws GMPException {
 		
 		return gmpRepo.findAll();
+	}
+	
+	
+	@Override
+	public GramPanchayatMember deleteGMP(Integer gmpId) throws GMPException {
+		
+		
+     Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+		
+		
+		GramPanchayatMember gmp=gmpOptional.get();
+		
+		if(gmpOptional.isEmpty()) {
+			
+			 throw new GMPException("GMP does not exists with the GMPID :"+gmp.getId()+" ! Enter a valid GMP Id");
+			
+		}
+		
+		gmpRepo.delete(gmp);
+		
+		return gmp;
+		
 	}
 	
 	
@@ -137,6 +185,9 @@ public class BDOServiceImp implements BDOService{
 	    
 	    projectList.add(project);
 	    
+	    for(Project p: projectList) {
+	    	p.setGramPanchayatMember(gmp);
+	    }
 	    
 		
 	    return gmpRepo.save(gmp);
@@ -152,5 +203,16 @@ public class BDOServiceImp implements BDOService{
 		
 		return workerRepo.findAll();
 	}
+
+
+
+
+
+
+
+
+
+
+	
 
 }

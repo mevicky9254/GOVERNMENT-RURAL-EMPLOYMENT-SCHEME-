@@ -78,27 +78,48 @@ public class GMPServiceImp implements GMPService{
 	
 
 	
-
 	@Override
-	public Worker deleteWorker(Integer workerId) throws WorkerException {
+	public Worker allocateProjectToWorker(Integer gmpId,Integer workerId, Integer projectId)
+			throws WorkerException, ProjectException {
+	
+		Optional<Worker> optionalWorker=workerRepo.findById(workerId);
 		
-		
-		Optional<Worker> workerOptional=workerRepo.findById(workerId);
-		
-		
-		if(workerOptional.isEmpty()) {
-			
-			throw new WorkerException("Worker is not present in the record with workerId : "+workerId);
-			
+		if(optionalWorker==null) {
+			throw new WorkerException("Worker does not exists with workerId "+workerId);
 		}
 		
-		workerRepo.deleteById(workerId);
+		Worker worker=optionalWorker.get();
 		
-		Worker worker=workerOptional.get();
+		
+				
+       Optional<GramPanchayatMember> optionalGmp=gmpRepo.findById(gmpId);
+       
+       GramPanchayatMember gmp=optionalGmp.get();
+       
+       List<Project> projects=gmp.getProjects();
+       
+       boolean flag=false;
+       
+       for(Project project:projects) {
+    	   if(project.getId()==projectId) {
+    		   
+    		   worker.setProjects(project);
+    		   workerRepo.save(worker);
+    		   flag=true;
+    		   break;
+    	   }
+       }
+       
+       
+       
+       if(flag==false) {
+    	   throw new ProjectException("Project does not exist in GramPanchyat Members's List");
+       }
 		
 		return worker;
-		
+			
 	}
+	
 
 
 
@@ -124,5 +145,50 @@ public class GMPServiceImp implements GMPService{
 		
 		
 	}
+
+
+
+
+	@Override
+	public List<Project> getProjectList(Integer gmpId) throws GMPException {
+		
+		 Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+			
+			
+			GramPanchayatMember gmp=gmpOptional.get();
+			
+			if(gmpOptional.isEmpty()) {
+				
+				 throw new GMPException("GMP does not exists with the GMPID :"+gmp.getId()+" ! Enter a valid GMP Id");
+				
+			}
+			
+			return gmp.getProjects();
+	}
+
+
+	@Override
+	public Worker deleteWorker(Integer workerId) throws WorkerException {
+		
+		
+		Optional<Worker> workerOptional=workerRepo.findById(workerId);
+		
+		
+		if(workerOptional.isEmpty()) {
+			
+			throw new WorkerException("Worker is not present in the record with workerId : "+workerId);
+			
+		}
+		
+		workerRepo.deleteById(workerId);
+		
+		Worker worker=workerOptional.get();
+		
+		return worker;
+		
+	}
+
+
+
 
 }

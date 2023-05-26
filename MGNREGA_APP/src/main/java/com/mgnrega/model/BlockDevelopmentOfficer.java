@@ -47,7 +47,7 @@ public class BlockDevelopmentOfficer {
 	
 	@JsonIgnore
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-//	@JoinColumn(name = "bdo_id")
+	@JoinColumn(name = "bdo_id")
 	private List<GramPanchayatMember> gmps;
 	
 	

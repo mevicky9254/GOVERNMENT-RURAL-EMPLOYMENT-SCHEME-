@@ -15,9 +15,13 @@ public interface BDOService {
 	
 	public List<Project> viewListOfProjects()throws ProjectException;
 	
+	public Project deleteProject(Integer pro_Id)throws ProjectException;
+	
 	public GramPanchayatMember createGMP( GramPanchayatMember GMP)throws GMPException;
 	
 	public List<GramPanchayatMember> viewListOfGMPS()throws GMPException;
+	
+	public GramPanchayatMember deleteGMP(Integer gmp_Id)throws  GMPException;
 	
 	public GramPanchayatMember allocateProjectToGMP(Integer gmpId,Integer projectId)throws GMPException,ProjectException;
 	

@@ -2,6 +2,8 @@ package com.mgnrega.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,8 +46,7 @@ public class Worker {
 	@Column(name="adhar", nullable=false, unique=true)
 	private String adhar;
 	
-	@NotNull
-	@NotBlank
+	@NotNull(message = "DOB cannot be null")
 	private LocalDate dob;
 	
 	@NotNull
@@ -65,10 +66,12 @@ public class Worker {
 	private String State;
 	
 	
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "member_id")
     private GramPanchayatMember gramPanchayatMember;
 
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project projects;

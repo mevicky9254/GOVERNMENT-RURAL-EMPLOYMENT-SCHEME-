@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -81,6 +82,22 @@ public class BDOController {
 		
 	}
 	
+	
+	
+	@DeleteMapping("BDO/GramPanchayatMember")
+	public ResponseEntity<GramPanchayatMember> deleteGMP(@RequestParam("GMP_Id")Integer gmpId) throws  GMPException{
+		
+		return new ResponseEntity<>(BdoService.deleteGMP(gmpId),HttpStatus.OK);
+		
+	}
+	
+	
+	@DeleteMapping("BDO/project")
+	public ResponseEntity<Project> deleteProject(@RequestParam("Project_Id")Integer projectId) throws  ProjectException{
+		
+		return new ResponseEntity<>(BdoService.deleteProject(projectId),HttpStatus.OK);
+		
+	}
 	
 	
 }
