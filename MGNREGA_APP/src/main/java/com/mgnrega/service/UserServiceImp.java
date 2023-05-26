@@ -1,4 +1,4 @@
-package com.mgnrega.service;
+                                                                                                                                                                                                                                                                     package com.mgnrega.service;
 
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,5 @@ public class UserServiceImp implements UserService{
 	public String logOutFromAccount(String key) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-}
+	}                   }
+                                                                                                                                                                                                                                                                                                                                                                                                          
