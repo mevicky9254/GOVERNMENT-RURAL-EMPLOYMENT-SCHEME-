@@ -8,6 +8,8 @@ import com.mgnrega.model.BlockDevelopmentOfficer;
 @Repository
 public interface BDORepository extends JpaRepository<BlockDevelopmentOfficer ,Integer> {
 
+	public BlockDevelopmentOfficer findByEmail(String userId);
+
 	
 	
 }
