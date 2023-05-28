@@ -45,4 +45,22 @@ The application uses POJO classes to represent the entities in the system. The c
   The application is built using Spring Boot and follows the Model-View-Controller (MVC) architecture. It uses a relational database to     store and retrieve data.
   
   # ER DIAGRAM
-  <img src="https://postimg.cc/kRgnXVL1" alt="" style="width: 80%; height:350px; margin: 0 auto; border: 2px solid   darkred;">
+  <img src="https://i.postimg.cc/RhcqdKdB/GRES-SCHEMA-png.png" alt="" style="width: 80%; height:350px; margin: 0 auto; border: 2px solid   darkred;">
+  
+  
+   <h1>[Getting Started]</h1>
+    <h3>Execution</h3>
+    <p>If you want to run the project in your local machine</p>
+    <p>Follow the given steps:</p>
+    <ul>
+        <li>Clone the respository <a href="https://github.com/mevicky9254/encouraging-comparison-4433.git">https://github.com/mevicky9254/encouraging-comparison-4433.git</a></li>
+        <li>Open the code in VS code or STS </li>
+ <li>Congrats !  you have successfully sarted the application.</li>
+    </ul>
+    
+    
+     
+   <h3>Creator</h3>     
+  <a href="https://github.com/mevicky9254">@Vikki Kumar</a>
+    
+  
