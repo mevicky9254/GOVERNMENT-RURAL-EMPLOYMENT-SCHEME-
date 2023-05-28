@@ -40,7 +40,7 @@ public class Project {
 	private Integer per_day_wages;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL, mappedBy="projects")
+	@OneToMany(fetch=FetchType.EAGER , mappedBy="projects")
 	private List<Worker> workers;
     
 	
