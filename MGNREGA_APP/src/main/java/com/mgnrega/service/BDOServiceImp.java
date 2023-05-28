@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.mgnrega.exception.GMPException;
 import com.mgnrega.exception.ProjectException;
+import com.mgnrega.exception.UserException;
 import com.mgnrega.exception.WorkerException;
+import com.mgnrega.model.CurrentUserSession;
 import com.mgnrega.model.GramPanchayatMember;
 import com.mgnrega.model.Project;
 import com.mgnrega.model.Worker;
+import com.mgnrega.repository.CurrentUserSessionRepo;
 import com.mgnrega.repository.GMPRepository;
 import com.mgnrega.repository.ProjectRepository;
 import com.mgnrega.repository.WorkerRepository;
@@ -30,9 +33,21 @@ public class BDOServiceImp implements BDOService{
 	@Autowired
 	public WorkerRepository workerRepo;
 	
+	@Autowired
+	public CurrentUserSessionRepo uRepo;
+	
+	
 	
 	@Override
-	public Project createProject(Project project) throws ProjectException {
+	public Project createProject(Project project,String key) throws ProjectException, UserException {
+		
+		CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
+		
 	    Optional<Project> optional = pRepo.findById(project.getId());
 	    if (optional.isPresent()) {
 	        Project presentProject = optional.get();
@@ -61,7 +76,13 @@ public class BDOServiceImp implements BDOService{
 	
 
 	@Override
-	public List<Project> viewListOfProjects() throws ProjectException {
+	public List<Project> viewListOfProjects(String key) throws ProjectException ,UserException{
+		
+     CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		return pRepo.findAll();
 	}
@@ -70,7 +91,14 @@ public class BDOServiceImp implements BDOService{
 	
 
 	@Override
-	public Project deleteProject(Integer projectId) throws ProjectException {
+	public Project deleteProject(Integer projectId,String key) throws ProjectException , UserException{
+		
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+ 		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		  Optional<Project>proOptional=pRepo.findById( projectId);
 			
@@ -94,7 +122,15 @@ public class BDOServiceImp implements BDOService{
 	
 	
 	@Override
-	public GramPanchayatMember createGMP(GramPanchayatMember GMP) throws GMPException {
+	public GramPanchayatMember createGMP(GramPanchayatMember GMP,String key) throws GMPException, UserException {
+		
+        CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
+		
 	    Optional<GramPanchayatMember> optional = gmpRepo.findById(GMP.getId());
 
 	    if (optional.isPresent()) {
@@ -123,14 +159,26 @@ public class BDOServiceImp implements BDOService{
 
 	
 	@Override
-	public List<GramPanchayatMember> viewListOfGMPS() throws GMPException {
+	public List<GramPanchayatMember> viewListOfGMPS(String key) throws GMPException, UserException {
+		
+        CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		return gmpRepo.findAll();
 	}
 	
 	
 	@Override
-	public GramPanchayatMember deleteGMP(Integer gmpId) throws GMPException {
+	public GramPanchayatMember deleteGMP(Integer gmpId,String key) throws GMPException, UserException {
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		
      Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
@@ -153,7 +201,15 @@ public class BDOServiceImp implements BDOService{
 	
 
 	@Override
-	public GramPanchayatMember allocateProjectToGMP(Integer gmpId, Integer projectId) throws GMPException, ProjectException {
+	public GramPanchayatMember allocateProjectToGMP(Integer gmpId, Integer projectId,String key) throws UserException, GMPException, ProjectException {
+		
+		
+       CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
 		
 		Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
 		
@@ -199,7 +255,14 @@ public class BDOServiceImp implements BDOService{
 	
 
 	@Override
-	public List<Worker> viewListWorkers() throws WorkerException {
+	public List<Worker> viewListWorkers(String key) throws WorkerException ,UserException {
+		
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		return workerRepo.findAll();
 	}

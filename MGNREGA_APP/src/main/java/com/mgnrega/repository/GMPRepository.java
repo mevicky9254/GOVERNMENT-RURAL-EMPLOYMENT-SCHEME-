@@ -11,7 +11,7 @@ import com.mgnrega.model.User;
 @Repository
 public interface GMPRepository extends JpaRepository<GramPanchayatMember,Integer> {
 
- public GramPanchayatMember findByIdEmail(String userId);
+ public GramPanchayatMember findByEmail(String userId);
 
 	
 	

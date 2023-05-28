@@ -44,26 +44,27 @@ public class UserServiceImp implements UserService{
 		
 		if(user.getType().equalsIgnoreCase("GMP")) {
 			
-			 GramPanchayatMember exixtingGMP=gmpRepo.findByIdEmail(user.getUserId());
+			 GramPanchayatMember existingGMP=gmpRepo.findByEmail(user.getUserId());
 			
-			if(exixtingGMP==null) {
+			if(existingGMP==null) {
 				throw new UserException("User does not exists with userId "+user.getUserId());
 			}
 			
 			
-			Optional<CurrentUserSession> optional= currentUserRepo.findById(exixtingGMP.getId());
+			Optional<CurrentUserSession> optional= currentUserRepo.findByUsername(existingGMP.getEmail());
 			
 			if(optional.isPresent()) {
 				throw new UserException("GMP is already logged in with  "+user.getUserId());
 			}
 			
-			if(exixtingGMP.getPassword().equalsIgnoreCase(user.getPassword())) {
+			if(existingGMP.getPassword().equalsIgnoreCase(user.getPassword())) {
 				
-				String sessionKey=RandomString.make(6);
+				String sessionKey=RandomString.make(5);
 				
 				CurrentUserSession currentUser=new CurrentUserSession();
-				currentUser.setUserId(exixtingGMP.getId());
-				currentUser.setUuid(sessionKey);
+				currentUser.setUserId(existingGMP.getId());
+				currentUser.setUsername(existingGMP.getEmail());
+				currentUser.setUuid(sessionKey+"GMP");
 				currentUser.setLocalDateTime(LocalDateTime.now());
 				
 				currentUserRepo.save(currentUser);
@@ -77,26 +78,27 @@ public class UserServiceImp implements UserService{
 			
 		  }else if(user.getType().equalsIgnoreCase("BDO")) {
 				
-				 BlockDevelopmentOfficer exixtingBDO=bdoRepo.findByEmail(user.getUserId());
+				 BlockDevelopmentOfficer existingBDO=bdoRepo.findByEmail(user.getUserId());
 				
-				if(exixtingBDO==null) {
+				if(existingBDO==null) {
 					throw new UserException("User does not exists with userId "+user.getUserId());
 				}
 				
 				
-				Optional<CurrentUserSession> optional= currentUserRepo.findById(exixtingBDO.getId());
+				Optional<CurrentUserSession> optional= currentUserRepo.findByUsername(existingBDO.getEmail());
 				
 				if(optional.isPresent()) {
 					throw new UserException("BDO is already logged in with  "+user.getUserId());
 				}
 				
-				if(exixtingBDO.getPassword().equalsIgnoreCase(user.getPassword())) {
+				if(existingBDO.getPassword().equalsIgnoreCase(user.getPassword())) {
 					
-					String sessionKey=RandomString.make(6);
+					String sessionKey=RandomString.make(5);
 					
 					CurrentUserSession currentUser=new CurrentUserSession();
-					currentUser.setUserId(exixtingBDO.getId());
-					currentUser.setUuid(sessionKey);
+					currentUser.setUserId(existingBDO.getId());
+					currentUser.setUsername(existingBDO.getEmail());
+					currentUser.setUuid(sessionKey+"BDO");
 					currentUser.setLocalDateTime(LocalDateTime.now());
 					
 					currentUserRepo.save(currentUser);

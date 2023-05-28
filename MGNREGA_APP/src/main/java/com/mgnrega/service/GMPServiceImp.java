@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.mgnrega.exception.GMPException;
 import com.mgnrega.exception.ProjectException;
+import com.mgnrega.exception.UserException;
 import com.mgnrega.exception.WorkerException;
+import com.mgnrega.model.CurrentUserSession;
 import com.mgnrega.model.GramPanchayatMember;
 import com.mgnrega.model.Project;
 import com.mgnrega.model.Worker;
+import com.mgnrega.repository.CurrentUserSessionRepo;
 import com.mgnrega.repository.GMPRepository;
 import com.mgnrega.repository.ProjectRepository;
 import com.mgnrega.repository.WorkerRepository;
@@ -29,9 +32,20 @@ public class GMPServiceImp implements GMPService{
 	@Autowired
 	public WorkerRepository workerRepo;
 	
+	@Autowired
+	public CurrentUserSessionRepo uRepo;
+	
+	
+	
 	
 	@Override
-	public Worker addWorker(Worker worker) throws WorkerException {
+	public Worker addWorker(Worker worker, String key) throws WorkerException, UserException {
+		
+     CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		
 	Optional<Worker> workerOptional=workerRepo.findById(worker.getId());
@@ -53,7 +67,13 @@ public class GMPServiceImp implements GMPService{
 	
 
 	@Override
-	public List<Worker> viewListOfworkers() throws WorkerException {
+	public List<Worker> viewListOfworkers(String key) throws WorkerException, UserException {
+		
+     CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		return workerRepo.findAll();
 	}
@@ -61,8 +81,16 @@ public class GMPServiceImp implements GMPService{
 	
 	
 	
+	
 	@Override
-	public Worker viewWorkerUsingAdhar(String adhar) throws WorkerException {
+	public Worker viewWorkerUsingAdhar(String adhar, String key) throws WorkerException, UserException {
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
 		
 		Worker worker=workerRepo.findByAdhar(adhar);
 		
@@ -79,9 +107,18 @@ public class GMPServiceImp implements GMPService{
 
 	
 	@Override
-	public Worker allocateProjectToWorker(Integer gmpId,Integer workerId, Integer projectId)
-			throws WorkerException, ProjectException {
+	public Worker allocateProjectToWorker(Integer gmpId,Integer workerId, Integer projectId, String key)
+			                                          throws WorkerException, ProjectException, UserException {
 	
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
+		
+		
 		Optional<Worker> optionalWorker=workerRepo.findById(workerId);
 		
 		if(optionalWorker==null) {
@@ -125,10 +162,17 @@ public class GMPServiceImp implements GMPService{
 
 
 	@Override
-	public GramPanchayatMember updatePassword(Integer gmpId, String password) throws GMPException {
-		// TODO Auto-generated method stub
+	public GramPanchayatMember updatePassword(Integer gmpId, String password, String key) throws GMPException, UserException {
+		  
+     CurrentUserSession user=uRepo.findByUuid(key);
 		
-    Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
+		
+		
+      Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
 		
 		
 		GramPanchayatMember gmp=gmpOptional.get();
@@ -150,7 +194,15 @@ public class GMPServiceImp implements GMPService{
 
 
 	@Override
-	public List<Project> getProjectList(Integer gmpId) throws GMPException {
+	public List<Project> getProjectList(Integer gmpId, String key) throws GMPException, UserException {
+		
+		
+       CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
+		
 		
 		 Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
 			
@@ -168,7 +220,13 @@ public class GMPServiceImp implements GMPService{
 
 
 	@Override
-	public Worker deleteWorker(Integer workerId) throws WorkerException {
+	public Worker deleteWorker(Integer workerId, String key) throws WorkerException, UserException {
+		
+      CurrentUserSession user=uRepo.findByUuid(key);
+		
+		if(user==null) {
+			throw new UserException(" Please login first !");
+		}
 		
 		
 		Optional<Worker> workerOptional=workerRepo.findById(workerId);
