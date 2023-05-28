@@ -53,8 +53,9 @@ The application uses POJO classes to represent the entities in the system. The c
     <p>If you want to run the project in your local machine</p>
     <p>Follow the given steps:</p>
     <ul>
-        <li>Clone the respository <a href="https://github.com/mevicky9254/Government-Rural-Employment-Scheme-.git">https://github.com/mevicky9254/Government-Rural-Employment-Scheme-.git</a></li>
         <li>Open the code in VS code or STS </li>
+        <li>Clone the respository <a href="https://github.com/mevicky9254/Government-Rural-Employment-Scheme-.git">https://github.com/mevicky9254/Government-Rural-Employment-Scheme-.git</a></li>
+       
  <li>Congrats !  you have successfully sarted the application.</li>
     </ul>
     
