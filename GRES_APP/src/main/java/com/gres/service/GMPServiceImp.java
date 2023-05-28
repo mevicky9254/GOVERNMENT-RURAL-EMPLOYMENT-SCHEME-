@@ -107,7 +107,7 @@ public class GMPServiceImp implements GMPService{
 
 	
 	@Override
-	public Worker allocateProjectToWorker(Integer gmpId,Integer workerId, Integer projectId, String key)
+	public Worker allocateProjectToWorker(Integer workerId, Integer projectId, String key)
 			                                          throws WorkerException, ProjectException, UserException {
 	
 		
@@ -129,7 +129,7 @@ public class GMPServiceImp implements GMPService{
 		
 		
 				
-       Optional<GramPanchayatMember> optionalGmp=gmpRepo.findById(gmpId);
+       Optional<GramPanchayatMember> optionalGmp=gmpRepo.findById(user.getUserId());
        
        GramPanchayatMember gmp=optionalGmp.get();
        
@@ -162,7 +162,7 @@ public class GMPServiceImp implements GMPService{
 
 
 	@Override
-	public GramPanchayatMember updatePassword(Integer gmpId, String password, String key) throws GMPException, UserException {
+	public GramPanchayatMember updatePassword(String password, String key) throws GMPException, UserException {
 		  
      CurrentUserSession user=uRepo.findByUuid(key);
 		
@@ -172,7 +172,7 @@ public class GMPServiceImp implements GMPService{
 		
 		
 		
-      Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+      Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(user.getUserId());
 		
 		
 		GramPanchayatMember gmp=gmpOptional.get();
@@ -194,7 +194,7 @@ public class GMPServiceImp implements GMPService{
 
 
 	@Override
-	public List<Project> getProjectList(Integer gmpId, String key) throws GMPException, UserException {
+	public List<Project> getProjectList(String key) throws GMPException, UserException {
 		
 		
        CurrentUserSession user=uRepo.findByUuid(key);
@@ -204,7 +204,7 @@ public class GMPServiceImp implements GMPService{
 		}
 		
 		
-		 Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(gmpId);
+		 Optional< GramPanchayatMember>gmpOptional=gmpRepo.findById(user.getUserId());
 			
 			
 			GramPanchayatMember gmp=gmpOptional.get();

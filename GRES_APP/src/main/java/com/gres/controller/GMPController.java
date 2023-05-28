@@ -42,13 +42,12 @@ public class GMPController {
 	
 	
 	@PostMapping("gmp/allocateProject")
-	public ResponseEntity<Worker> allocateProjectToWorker(@RequestParam("GMP_ID") Integer gmpId,
-			                                              @RequestParam("Worker_ID") Integer workerId,
+	public ResponseEntity<Worker> allocateProjectToWorker(@RequestParam("Worker_ID") Integer workerId,
 			                                              @RequestParam("Project_ID") Integer projectId,
 			                                              @RequestParam("SessionKey") String key
 			                                              ) throws WorkerException, ProjectException, UserException{
 		
-		return new ResponseEntity<>(gmpService.allocateProjectToWorker(gmpId, workerId, projectId,key), HttpStatus.OK);
+		return new ResponseEntity<>(gmpService.allocateProjectToWorker( workerId, projectId,key), HttpStatus.OK);
 		
 	}
 	
@@ -70,19 +69,18 @@ public class GMPController {
 	}
 	
 	@GetMapping("gmp/projects")
-	public ResponseEntity<List<Project>> viewProjects(@RequestParam("GMP_ID")Integer gmp_Id,@RequestParam("SessionKey") String key) throws  GMPException, UserException{
+	public ResponseEntity<List<Project>> viewProjects(@RequestParam("SessionKey") String key) throws  GMPException, UserException{
 		
-		return new ResponseEntity<>(gmpService.getProjectList(gmp_Id, key), HttpStatus.OK);
+		return new ResponseEntity<>(gmpService.getProjectList(key), HttpStatus.OK);
 		
 	}
 	
 	
 	@PutMapping("gmp/updatePassword")
-	public ResponseEntity<GramPanchayatMember> updatePassword(@RequestParam("GMP_ID")Integer gmpId,
-			                                                  @RequestParam("New_Password")String password,
+	public ResponseEntity<GramPanchayatMember> updatePassword(@RequestParam("New_Password")String password,
 			                                                  @RequestParam("SessionKey") String key) throws GMPException, UserException{
 		
-		return new ResponseEntity<>(gmpService.updatePassword(gmpId, password,key), HttpStatus.OK);
+		return new ResponseEntity<>(gmpService.updatePassword(password,key), HttpStatus.OK);
 		
 	}
 	

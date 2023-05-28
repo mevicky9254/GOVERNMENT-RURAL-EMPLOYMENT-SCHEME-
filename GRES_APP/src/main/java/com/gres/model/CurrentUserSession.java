@@ -20,8 +20,7 @@ import lombok.ToString;
 public class CurrentUserSession {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@Column(unique = true)
+    @Column(unique = true)
 	private Integer userId;
 	
 	@Column(unique = true)

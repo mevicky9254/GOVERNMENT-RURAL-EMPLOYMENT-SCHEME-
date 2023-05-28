@@ -18,13 +18,13 @@ public interface GMPService {
 	
 	public Worker viewWorkerUsingAdhar(String adhar, String key)throws WorkerException, UserException;
 	
-	public Worker allocateProjectToWorker(Integer gmpId,Integer workerId,Integer projectId, String key)throws UserException, WorkerException,ProjectException;
+	public Worker allocateProjectToWorker(Integer workerId,Integer projectId, String key)throws UserException, WorkerException,ProjectException;
 	
-	public GramPanchayatMember updatePassword(Integer gmpId,String password, String key)throws GMPException, UserException;
+	public GramPanchayatMember updatePassword(String password, String key)throws GMPException, UserException;
 	
 	public Worker deleteWorker(Integer workerId, String key)throws WorkerException, UserException;
 	
-	public List<Project> getProjectList(Integer gmpId, String key)throws  GMPException, UserException;
+	public List<Project> getProjectList(String key)throws  GMPException, UserException;
 	
 
 }
