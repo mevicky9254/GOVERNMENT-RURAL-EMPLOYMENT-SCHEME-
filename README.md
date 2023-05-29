@@ -11,7 +11,8 @@ The application uses POJO classes to represent the entities in the system. The c
   1. Java Core
   2. MySql
   3. Maven
-  4. SpringBoot   
+  4. SpringBoot
+  5. Hibernate   
   
   
   # Features:-
