@@ -29,18 +29,18 @@ public class Project {
 	@Column(name="projectName",nullable=false,unique=true)
 	private String projectName;
 	
-	@Column(name="startDate",nullable=false,unique=true)
+	@Column(name="startDate",nullable=false)
 	private LocalDate startDate;
 	
-	@Column(name="endDate",nullable=false,unique=true)
+	@Column(name="endDate",nullable=false)
 	private LocalDate endDate;
 	
 	
-	@Column(name="per_day_wages",nullable=false,unique=true)
+	@Column(name="per_day_wages")
 	private Integer per_day_wages;
 	
 	@JsonIgnore
-	@OneToMany(fetch=FetchType.EAGER , mappedBy="projects")
+	@OneToMany(fetch=FetchType.EAGER ,cascade=CascadeType.PERSIST, mappedBy="projects")
 	private List<Worker> workers;
     
 	

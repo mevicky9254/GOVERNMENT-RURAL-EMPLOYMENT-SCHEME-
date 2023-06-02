@@ -125,9 +125,9 @@ public class UserServiceImp implements UserService{
 		CurrentUserSession currentUserSession = currentUserRepo.findByUuid(key);
 		if (currentUserSession.equals(null))
 			throw new UserException("Log in first");
-
+        String message= "Logged Out Successfully !";
 		currentUserRepo.delete(currentUserSession);
-		return "Logged Out Successfully !";
+		return  message ;
 	}
 	
 	

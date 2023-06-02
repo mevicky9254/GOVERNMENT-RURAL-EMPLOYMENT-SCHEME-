@@ -6,14 +6,17 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gres.exception.BDOException;
 import com.gres.exception.GMPException;
 import com.gres.exception.ProjectException;
 import com.gres.exception.UserException;
 import com.gres.exception.WorkerException;
+import com.gres.model.BlockDevelopmentOfficer;
 import com.gres.model.CurrentUserSession;
 import com.gres.model.GramPanchayatMember;
 import com.gres.model.Project;
 import com.gres.model.Worker;
+import com.gres.repository.BDORepository;
 import com.gres.repository.CurrentUserSessionRepo;
 import com.gres.repository.GMPRepository;
 import com.gres.repository.ProjectRepository;
@@ -36,6 +39,8 @@ public class BDOServiceImp implements BDOService{
 	@Autowired
 	public CurrentUserSessionRepo uRepo;
 	
+	@Autowired
+	public BDORepository bdoRepo;
 	
 	
 	@Override
@@ -265,6 +270,23 @@ public class BDOServiceImp implements BDOService{
 		}
 		
 		return workerRepo.findAll();
+	}
+
+
+
+
+
+	@Override
+	public BlockDevelopmentOfficer registerBDO(BlockDevelopmentOfficer BDO) throws BDOException {
+		
+		
+		Optional<BlockDevelopmentOfficer> optional =bdoRepo.findById(BDO.getId());
+		
+		if(!optional.isEmpty()) {
+			throw new BDOException("BDO is already registered !");
+		}
+		
+		return bdoRepo.save(BDO);
 	}
 
 

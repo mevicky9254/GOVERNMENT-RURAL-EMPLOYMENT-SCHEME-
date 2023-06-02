@@ -68,14 +68,14 @@ public class GramPanchayatMember {
 	@NotBlank
 	private String State;
 	
-//	
-//	@ManyToOne
-//	@JoinColumn(name="BDO_ID")
-//	private BlockDevelopmentOfficer BDO;
-//	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="BDO_ID")
+	private BlockDevelopmentOfficer BDO;
+	
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "gramPanchayatMember", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "gramPanchayatMember")
     private List<Project> projects;
 
 	@JsonIgnore

@@ -1,6 +1,7 @@
 package com.gres.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gres.exception.BDOException;
 import com.gres.exception.GMPException;
 import com.gres.exception.ProjectException;
 import com.gres.exception.UserException;
 import com.gres.exception.WorkerException;
+import com.gres.model.BlockDevelopmentOfficer;
 import com.gres.model.GramPanchayatMember;
 import com.gres.model.Project;
 import com.gres.model.Worker;
@@ -31,6 +34,22 @@ public class BDOController {
 	
 	@Autowired
 	public BDOService BdoService;
+	
+	
+	
+	
+	
+   @PostMapping("BDO/register")	
+   public ResponseEntity<BlockDevelopmentOfficer >registerBDOHandler(@RequestBody  BlockDevelopmentOfficer BDO) throws BDOException {
+		
+		BlockDevelopmentOfficer bdo=	BdoService.registerBDO(BDO);
+		
+		return new ResponseEntity<>(bdo,HttpStatus.CREATED);
+		
+	}
+	
+	
+	
 	
 	
 	@PostMapping("BDO/createProject")
