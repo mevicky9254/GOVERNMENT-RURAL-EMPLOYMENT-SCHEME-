@@ -46,7 +46,7 @@ The application uses POJO classes to represent the entities in the system. The c
   The application is built using Spring Boot and follows the Model-View-Controller (MVC) architecture. It uses a relational database to     store and retrieve data.
   
   # ER DIAGRAM
-  <img src="https://i.postimg.cc/76z6VdMc/Untitled-design-2.png" alt="" style="width: 80%; height:350px; margin: 0 auto; border: 2px solid   darkred;">
+ ![Untitled design (2)](https://github.com/mevicky9254/Government-Rural-Employment-Scheme-/assets/112768362/7afcc467-16de-47fc-b72e-25fc967550b9)
   
   
    <h1>[Getting Started]</h1>
